@@ -1,12 +1,11 @@
 package Modele;
 
-import java.io.File;
+import java.io.IOException;
 
 public class Apprenti extends Ouvrier{
     private static int nbTTcompetence = 2;
-    private static File fichierImage = new File("../../image/iapprenti.png");
 
-
+	
     public Apprenti(int cBois, int cPierre, int cCeramique){
         super(cBois, cPierre, cCeramique);
         while(!ChekNbCTotal(this.cBois, this.cPierre, this.cCeramique, nbTTcompetence)){
@@ -24,8 +23,17 @@ public class Apprenti extends Ouvrier{
         }
     }
 
-    public static File getFichierImage() {
-        return fichierImage;
+    /*public static String getPathImage() {
+        return currentpath + "\\image\\iapprenti.png";
+    }*/
+    
+    public String getPathImage() throws IOException {
+    	String currentpath=new java.io.File(".").getCanonicalPath();
+    	return currentpath + "\\image\\iapprenti.png";
+    }
+    
+    public String toString() {
+    	return "Apprenti, cBois = "+ this.getcBois() + ", cPierre = " +this.getcPierre() + ", cCeramique = " +this.getcCeramique();
     }
 
 }

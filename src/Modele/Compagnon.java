@@ -1,6 +1,7 @@
 package Modele;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Compagnon extends Ouvrier{
     private static int nbTTcompetence = 4;
@@ -41,4 +42,13 @@ public class Compagnon extends Ouvrier{
         return fichierImage;
     }
 
+    
+    public String getPathImage() throws IOException {
+    	String currentpath=new java.io.File(".").getCanonicalPath();
+    	return currentpath + "\\image\\icompagnon.png";
+    }
+    
+    public String toString() {
+    	return "Compagnon, cBois = "+ this.getcBois() + ", cPierre = " +this.getcPierre() + ", cCeramique = " +this.getcCeramique();
+    }
 }

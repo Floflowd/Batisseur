@@ -1,10 +1,14 @@
 package Modele;
 
+import java.io.IOException;
+
 public class Ouvrier {
     private static int nbOuvrier =0;
     protected int cBois;
     protected int cPierre;
     protected int cCeramique;
+    
+
 
 
     public Ouvrier(int cBois, int cPierre, int cCeramique) {
@@ -77,4 +81,13 @@ public class Ouvrier {
         return false;
     }
 
+    public String getPathImage() throws IOException {
+    	String currentpath=new java.io.File(".").getCanonicalPath();
+    	return currentpath;
+    }
+    
+    
+    public String toString() {
+    	return "Ouvrier, cBois = "+ this.getcBois() + ", cPierre = " +this.getcPierre() + ", cCeramique = " +this.getcCeramique();
+    }
 }

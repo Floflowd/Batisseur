@@ -2,9 +2,9 @@ package Modele;
 
 public class Batiment {
     private static int nbBatiment =0;
-    private int besoinCBois;
-    private int besoinCPierre;
-    private int besoinCCeramique;
+    protected int besoinCBois;
+    protected int besoinCPierre;
+    protected int besoinCCeramique;
     private boolean chantierEnd; //status du chantier
 
 

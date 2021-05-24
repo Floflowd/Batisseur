@@ -45,7 +45,7 @@ public class Compagnon extends Ouvrier{
     
     public String getPathImage() throws IOException {
     	String currentpath=new java.io.File(".").getCanonicalPath();
-    	return currentpath + "\\image\\icompagnon.png";
+    	return currentpath + "\\image\\Ouvrier\\icompagnon.png";
     }
     
     public String toString() {

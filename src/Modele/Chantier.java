@@ -6,6 +6,10 @@ public class Chantier extends Batiment{
 
     private ArrayList<Ouvrier> ListOuvrier=new ArrayList<Ouvrier>();
 
+    public Chantier(int cBois, int cPierre, int cCeramique, String string) {
+        super(cBois, cPierre, cCeramique,string);
+    }
+    
     public Chantier(int cBois, int cPierre, int cCeramique) {
         super(cBois, cPierre, cCeramique);
     }

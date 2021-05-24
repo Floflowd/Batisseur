@@ -1,13 +1,9 @@
 package Modele;
 
-import java.io.File;
 import java.io.IOException;
 
 public class Maitre extends Ouvrier{
     private static int nbTTcompetence = 5;
-    private static File fichierImage = new File("../../image/imaitre.png");
-
-
     public Maitre(int cBois, int cPierre, int cCeramique){
         super(cBois, cPierre, cCeramique);
         while(!ChekNbCTotal(this.cBois, this.cPierre, this.cCeramique, nbTTcompetence)){
@@ -40,7 +36,7 @@ public class Maitre extends Ouvrier{
 
     public String getPathImage() throws IOException {
     	String currentpath=new java.io.File(".").getCanonicalPath();
-    	return currentpath + "\\image\\imaitre.png";
+    	return currentpath + "\\image\\Ouvrier\\imaitre.png";
     }
     
 

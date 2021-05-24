@@ -29,7 +29,7 @@ public class Apprenti extends Ouvrier{
     
     public String getPathImage() throws IOException {
     	String currentpath=new java.io.File(".").getCanonicalPath();
-    	return currentpath + "\\image\\iapprenti.png";
+    	return currentpath + "\\image\\Ouvrier\\iapprenti.png";
     }
     
     public String toString() {

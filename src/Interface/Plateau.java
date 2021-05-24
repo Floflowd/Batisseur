@@ -1,33 +1,27 @@
 package Interface;
 
 import Modele.*;
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
-
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JScrollBar;
 
 public class Plateau extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField O1C1;
 	private JTextField O1C2;
@@ -45,6 +39,7 @@ public class Plateau extends JFrame {
 	private ArrayList<Chantier> ListChantier = new ArrayList<Chantier>();
 
 	// variable global
+	protected PanelImage panelChantier = new PanelImage();
 	protected PanelImage panelOuvrier1 = new PanelImage();
 	protected PanelImage panelOuvrier2 = new PanelImage();
 	protected PanelImage panelOuvrier3= new PanelImage();
@@ -59,6 +54,7 @@ public class Plateau extends JFrame {
 	private JButton btnSelect1;
 	private JButton btnSelect2;
 	private JButton btnSelect3;
+	private Ouvrier ovide;
 	
 	
 	
@@ -83,19 +79,18 @@ public class Plateau extends JFrame {
 		
 		String currentpath=new java.io.File(".").getCanonicalPath();
 		
-		panelOuvrier1.setImage(currentpath + "\\image\\iapprenti.png");
+		panelOuvrier1.setImage(currentpath + "\\image\\Ouvrier\\iapprenti.png");
 		contentPane.add(panelOuvrier1, "cell 0 2,grow");
 		
-		panelOuvrier2.setImage(currentpath + "\\image\\iapprenti.png");
+		panelOuvrier2.setImage(currentpath + "\\image\\Ouvrier\\iapprenti.png");
 		contentPane.add(panelOuvrier2, "cell 2 2,grow");
 		
-		panelOuvrier3.setImage(currentpath + "\\image\\iapprenti.png");
+		panelOuvrier3.setImage(currentpath + "\\image\\Ouvrier\\iapprenti.png");
 		contentPane.add(panelOuvrier3, "cell 4 2,grow");
 		
 		
 		
-		PanelImage panelChantier = new PanelImage();
-		panelChantier.setImage(currentpath + "\\image\\iapprenti.png");
+		panelChantier.setImage(currentpath + "\\image\\batiment\\chateau-fort.png");
 		contentPane.add(panelChantier, "cell 1 0,grow");
 		
 		
@@ -312,21 +307,34 @@ public class Plateau extends JFrame {
 				contentPane.remove(btnSelect1);
 				btnSelect1.setEnabled(false);
 				contentPane.add(btnSelect1, "cell 0 4");
-				contentPane.remove(panelOuvrier1);
+				ListOuvrierDispo[index]=ovide;
+				refresh_Ouvrier();
 			}
 			else if(index == 1) {
 				contentPane.remove(btnSelect2);
 				btnSelect2.setEnabled(false);
 				contentPane.add(btnSelect2, "cell 2 4");
-				contentPane.remove(panelOuvrier2);
+				ListOuvrierDispo[index]=ovide;
+				refresh_Ouvrier();
 			}
 			else {
 				contentPane.remove(btnSelect3);
 				btnSelect3.setEnabled(false);
 				contentPane.add(btnSelect3, "cell 4 4");
-				contentPane.remove(panelOuvrier3);
+				ListOuvrierDispo[index]=ovide;
+				refresh_Ouvrier();
 			}			
-		}			
+		}
+		int comptNull =0;
+		for(int i=0;i<4;i++) {
+			if(ListOuvrierDispo[i]==ovide) {
+				comptNull++;
+			}
+		}
+		System.out.println(comptNull);
+		if(comptNull ==3) {
+			endGame();
+		}
 
 	}
 
@@ -336,10 +344,16 @@ public class Plateau extends JFrame {
 			int alea = (int)(Math.random() * (ListChantier.size()-1));
 			currentChantier = ListChantier.get(alea);
 			ListChantier.remove(alea);
+			
+			panelChantier.setImage(currentChantier.getPathImage());
+			contentPane.remove(panelChantier);
+			contentPane.add(panelChantier, "cell 1 0,grow");
 			refresh_Chantier();
 		}
 		else {
 			System.out.print("Fin de la partie");
+			endGame();
+			
 		}
 		
 
@@ -351,16 +365,19 @@ public class Plateau extends JFrame {
 		ListOuvrier.add(new Apprenti(0,0,2));
 		ListOuvrier.add(new Compagnon(1,0,2));
 		ListOuvrier.add(new Compagnon(1,1,1));
+		/*ListOuvrier.add(new Compagnon(0,0,3));
 		ListOuvrier.add(new Manoeuvre(1,2,1));
 		ListOuvrier.add(new Manoeuvre(1,3,0));
 		ListOuvrier.add(new Maitre(2,1,2));
+		ListOuvrier.add(new Maitre(1,2,2));
 		ListOuvrier.add(new Maitre(3,1,1));
+		ListOuvrier.add(new Maitre(5,0,0));*/
+		ovide = new Ouvrier(0,0,0);
 		
-		
-		ListChantier.add(new Chantier(3,0,1));
-		ListChantier.add(new Chantier(1,1,1));
-		ListChantier.add(new Chantier(0,5,3));
-		ListChantier.add(new Chantier(5,0,0));
+		ListChantier.add(new Chantier(3,0,1,"Halles.png"));
+		ListChantier.add(new Chantier(1,1,1,"Moulin.png"));
+		//ListChantier.add(new Chantier(0,5,3,"Chateau-fort.png"));
+		//ListChantier.add(new Chantier(5,0,0,"Relais-Postal.png"));
 
 
 		
@@ -407,6 +424,21 @@ public class Plateau extends JFrame {
 		O3C3.setText(String.valueOf(ListOuvrierDispo[2].getcCeramique()));
 	}
 
+	private void endGame() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Acceuil frame = new Acceuil();
+					frame.setVisible(true);
+					setVisible(false);
+					frame.setScore(score.getText());
+				} catch (Exception e) {
+					e.printStackTrace();
+    			}
+    		}
+    	});
+	}
+	
 	private void refresh_Chantier() throws IOException {
 		
 		ChantierNecBois.setText(String.valueOf(currentChantier.getcBois()));

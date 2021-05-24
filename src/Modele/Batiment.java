@@ -1,31 +1,29 @@
 package Modele;
 
+import java.io.IOException;
+
 public class Batiment {
     private static int nbBatiment =0;
     protected int besoinCBois;
     protected int besoinCPierre;
     protected int besoinCCeramique;
-    private boolean chantierEnd; //status du chantier
+    protected String imageName;
 
-
-
-
+    public Batiment(int cBois, int cPierre, int cCeramique, String imageName) {
+        this.besoinCBois = cBois;
+        this.besoinCPierre = cPierre;
+        this.besoinCCeramique = cCeramique;
+        this.imageName = imageName;        
+        setNbBatiment();
+    }
+    
     public Batiment(int cBois, int cPierre, int cCeramique) {
         this.besoinCBois = cBois;
         this.besoinCPierre = cPierre;
         this.besoinCCeramique = cCeramique;
-        this.chantierEnd = false;
+        this.imageName = "End.jpg";        
         setNbBatiment();
     }
-    public Batiment(int cBois, int cPierre, int cCeramique, boolean chantierEnd) {
-        this.besoinCBois = cBois;
-        this.besoinCPierre = cPierre;
-        this.besoinCCeramique = cCeramique;
-        this.chantierEnd = chantierEnd;
-        setNbBatiment();
-    }
-
-
 
     public static int getNbBatiment() {
         return nbBatiment;
@@ -55,12 +53,11 @@ public class Batiment {
         this.besoinCCeramique = cCeramique;
     }
 
-    public boolean isChantierEnd() {
-        return chantierEnd;
+    public String getPathImage() throws IOException {
+    	String currentpath=new java.io.File(".").getCanonicalPath();
+    	return currentpath +"\\image\\batiment\\" +imageName;
     }
-    public void ChantierIsEnd() {
-        this.chantierEnd = true;
-    }
+    
 
 
 }

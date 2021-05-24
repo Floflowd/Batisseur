@@ -83,7 +83,7 @@ public class Ouvrier {
 
     public String getPathImage() throws IOException {
     	String currentpath=new java.io.File(".").getCanonicalPath();
-    	return currentpath;
+    	return currentpath + "\\image\\end.jpg";
     }
     
     

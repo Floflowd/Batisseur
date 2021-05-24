@@ -1,6 +1,5 @@
 package Interface;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,28 +9,31 @@ import javax.swing.SpringLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import java.awt.Component;
-import javax.swing.Box;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class Acceuil extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField txtScore;
 
 	/**
 	 * Create the frame.
 	 */
-	public Acceuil() {
+	public Acceuil(){
 		setTitle("Les Batisserus");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\flori\\Desktop\\cours confinement\\UML_Java\\Batisseurs\\image\\imaitre.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 478, 400);
+		setBounds(100, 100, 478, 401);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,6 +75,26 @@ public class Acceuil extends JFrame {
 		sl_contentPane.putConstraint(SpringLayout.EAST, lblBackGround, 0, SpringLayout.EAST, contentPane);
 		lblBackGround.setIcon(new ImageIcon("C:\\Users\\flori\\Desktop\\cours confinement\\UML_Java\\Batisseurs\\image\\medieval_city.jpg"));
 		contentPane.add(lblBackGround);
+		
+		JLabel lblOldScore = new JLabel("Score pr\u00E9c\u00E9dent :");
+		sl_contentPane.putConstraint(SpringLayout.NORTH, lblOldScore, 150, SpringLayout.NORTH, contentPane);
+		lblOldScore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOldScore.setForeground(Color.RED);
+		lblOldScore.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		contentPane.add(lblOldScore);
+		
+		txtScore = new JTextField();
+		sl_contentPane.putConstraint(SpringLayout.NORTH, txtScore, 150, SpringLayout.NORTH, lblTitre);
+		sl_contentPane.putConstraint(SpringLayout.WEST, txtScore, 0, SpringLayout.EAST, lblOldScore);
+		txtScore.setHorizontalAlignment(SwingConstants.LEFT);
+		txtScore.setEditable(false);
+		txtScore.setText("None");
+		contentPane.add(txtScore);
+		txtScore.setColumns(10);
 	}
-
+	
+	public void setScore(String score) {
+		txtScore.setText(score);
+		contentPane.add(txtScore);
+	}
 }
